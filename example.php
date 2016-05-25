@@ -4,7 +4,8 @@ require './lib/Curl.php';
 $curl = new Curl(array(
 	'timeout' => 30, // time limit for request
 	'strict_mode' => false, // whether CURLOPT_FAILONERROR or not
-	'max_redirects' => 10 // number of redirections to follow
+	'max_redirects' => 10, // number of redirections to follow
+	'http_version' => '1.1' // HTTP version (1.1, 1.0)
 ));
 
 

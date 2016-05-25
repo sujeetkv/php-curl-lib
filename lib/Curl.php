@@ -23,6 +23,12 @@ class Curl
 	protected $strict_mode = false;
 	protected $max_redirects = 10;
 	
+	protected $http_version = NULL;
+	protected $http_versions = array(
+		'1.0' => CURL_HTTP_VERSION_1_0,
+		'1.1' => CURL_HTTP_VERSION_1_1
+	);
+	
 	/**
 	 * Initialize class
 	 * @param array $config
@@ -292,7 +298,11 @@ class Curl
 			$this->options[CURLOPT_MAXREDIRS] = $this->max_redirects;
 		}
 		
-		empty($this->headers) or $this->options[CURLOPT_HTTPHEADER] = $this->headers;
+		(isset($this->options[CURLOPT_HTTPHEADER]) or empty($this->headers)) 
+		or $this->options[CURLOPT_HTTPHEADER] = $this->headers;
+		
+		(isset($this->options[CURLOPT_HTTP_VERSION]) or empty($this->http_version)) 
+		or $this->options[CURLOPT_HTTP_VERSION] = $this->http_version;
 		
 		if($this->request = curl_init($this->url) and is_resource($this->request)){
 			$set_options = curl_setopt_array($this->request, $this->options);
@@ -384,6 +394,9 @@ class Curl
 			isset($config['timeout']) and $this->timeout = $config['timeout'];
 			isset($config['strict_mode']) and $this->strict_mode = (bool) $config['strict_mode'];
 			isset($config['max_redirects']) and $this->max_redirects = (int) $config['max_redirects'];
+			
+			(isset($config['http_version']) and isset($this->http_versions[$config['http_version']])) 
+			and $this->http_version = $this->http_versions[$config['http_version']];
 		}
 	}
 	
