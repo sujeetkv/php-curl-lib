@@ -1,0 +1,21 @@
+{
+    "name": "sujeet-kumar/php-curl-lib",
+    "description": "PHP Curl Library",
+    "type": "library",
+    "keywords": ["php", "curl", "library"],
+    "homepage": "https://github.com/sujeet-kumar/php-curl-lib/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sujeet Kumar",
+            "email": "sujeetkv90@gmail.com"
+        }
+    ],
+    "require": {
+        "ext-curl": "*"
+    },
+    "autoload": {
+        "classmap": ["lib/"]
+    },
+    "minimum-stability": "dev"
+}
