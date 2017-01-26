@@ -15,7 +15,9 @@
         "ext-curl": "*"
     },
     "autoload": {
-        "classmap": ["lib/"]
+        "psr-4": {
+            "SujeetKumar\\CurlLib\\": "src/"
+        }
     },
     "minimum-stability": "dev"
 }
