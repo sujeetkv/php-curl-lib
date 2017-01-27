@@ -324,7 +324,6 @@ class Curl
         }
         
         (isset($this->options[CURLOPT_HTTPHEADER]) or empty($this->headers)) or $this->options[CURLOPT_HTTPHEADER] = $this->headers;
-        
         (isset($this->options[CURLOPT_HTTP_VERSION]) or empty($this->http_version)) or $this->options[CURLOPT_HTTP_VERSION] = $this->http_version;
         isset($this->options[CURLOPT_USERAGENT]) or $this->options[CURLOPT_USERAGENT] = self::USER_AGENT;
         
