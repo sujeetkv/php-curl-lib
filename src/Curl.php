@@ -9,6 +9,8 @@ namespace SujeetKumar\CurlLib;
  */
 class Curl
 {
+    const USER_AGENT = 'PHP Curl Library (+https://github.com/sujeet-kumar/php-curl-lib)';
+    
     protected $url = '';
     protected $port = 80;
     
@@ -100,7 +102,7 @@ class Curl
                 $this->options[CURLOPT_POSTFIELDS] = $data;
             } else {
                 is_array($data) and $data = http_build_query($data, NULL, '&');
-                $this->url .= ((parse_url($this->url, PHP_URL_QUERY)) ? '&' : '?') . $data;
+                $this->url .= (parse_url($this->url, PHP_URL_QUERY) ? '&' : '?') . $data;
             }
         }
         
@@ -158,6 +160,24 @@ class Curl
     public function setCookies($data = array()) {
         is_array($data) and $data = http_build_query($data, NULL, '; ');
         $this->options[CURLOPT_COOKIE] = $data;
+        return $this;
+    }
+    
+    /**
+     * Set http referer for request
+     * @param string $referer
+     */
+    public function setReferer($referer) {
+        $this->options[CURLOPT_REFERER] = $referer;
+        return $this;
+    }
+    
+    /**
+     * Set http user agent for request
+     * @param string $user_agent
+     */
+    public function setUserAgent($user_agent) {
+        $this->options[CURLOPT_USERAGENT] = $user_agent;
         return $this;
     }
     
@@ -306,6 +326,7 @@ class Curl
         (isset($this->options[CURLOPT_HTTPHEADER]) or empty($this->headers)) or $this->options[CURLOPT_HTTPHEADER] = $this->headers;
         
         (isset($this->options[CURLOPT_HTTP_VERSION]) or empty($this->http_version)) or $this->options[CURLOPT_HTTP_VERSION] = $this->http_version;
+        isset($this->options[CURLOPT_USERAGENT]) or $this->options[CURLOPT_USERAGENT] = self::USER_AGENT;
         
         if ($this->request = curl_init($this->url) and is_resource($this->request)) {
             $set_options = curl_setopt_array($this->request, $this->options);
