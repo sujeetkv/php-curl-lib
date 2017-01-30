@@ -18,6 +18,7 @@ $res1 = $curl->get('http://example.com');
 //echo $res1;
 echo '<pre>';
 print_r($curl->getInfo());
+print_r($res1->getHeaders());
 echo '</pre>';
 
 
@@ -48,7 +49,8 @@ echo '<pre>';
 print_r($curl->getInfo());
 echo '</pre>';
 
-
+// simple HEAD request
+$res5 = $curl->head('http://example.com');
 echo '<pre>';
-print_r($curl->getHeaders('http://example.com'));
+print_r($res5->getHeaders());
 echo '</pre>';

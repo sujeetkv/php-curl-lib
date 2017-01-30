@@ -84,13 +84,11 @@ class Curl
             
             case 'head':
                 $this->httpMethod('head');
-                $this->options[CURLOPT_HEADER] = true;
                 $this->options[CURLOPT_NOBODY] = true;
                 break;
             
             case 'options':
                 $this->httpMethod('options');
-                $this->options[CURLOPT_HEADER] = true;
                 break;
             
             default:
@@ -109,20 +107,6 @@ class Curl
         $this->setOptions($options);
         
         return $this->execute();
-    }
-    
-    /**
-     * Get response headers for given URL
-     * @param string $url
-     * @param mixed $data
-     * @param array $options
-     */
-    public function getHeaders($url, $data = array(), $options = array()) {
-        $headers = array();
-        if ($res = $this->head($url, $data = array(), $options = array())) {
-            $headers = $res->getHeaders();
-        }
-        return $headers;
     }
     
     /**
