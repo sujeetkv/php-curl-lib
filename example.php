@@ -1,6 +1,7 @@
 <?php
 require './src/Curl.php';
 require './src/CurlException.php';
+require './src/CurlResponse.php';
 
 use SujeetKumar\CurlLib\Curl;
 

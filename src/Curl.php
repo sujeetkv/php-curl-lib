@@ -120,7 +120,7 @@ class Curl
     public function getHeaders($url, $data = array(), $options = array()) {
         $headers = array();
         if ($res = $this->head($url, $data = array(), $options = array())) {
-            $headers = $this->parseHeader($res);
+            $headers = $res->getHeaders();
         }
         return $headers;
     }
@@ -311,7 +311,9 @@ class Curl
             return false;
         }
         
-        isset($this->options[CURLOPT_RETURNTRANSFER]) or $this->options[CURLOPT_RETURNTRANSFER] = true;
+        $this->options[CURLOPT_HEADER] = true;
+        $this->options[CURLOPT_RETURNTRANSFER] = true;
+        
         isset($this->options[CURLOPT_TIMEOUT]) or $this->options[CURLOPT_TIMEOUT] = $this->timeout;
         isset($this->options[CURLOPT_FAILONERROR]) or $this->options[CURLOPT_FAILONERROR] = $this->strict_mode;
         
@@ -345,7 +347,13 @@ class Curl
                 $response = $this->response;
                 curl_close($this->request);
                 $this->clear();
-                return $response;
+                
+                $header_size = $this->info['header_size'];
+                $http_code = $info['http_code'];
+                $headers = substr($response, 0, $header_size);
+                $body = substr($response, $header_size);
+                
+                return new CurlResponse($response, $headers, $body, $http_code);
             }
         } else {
             $this->clear();
@@ -395,21 +403,6 @@ class Curl
      */
     public function errorMsg() {
         return $this->error_msg;
-    }
-    
-    /**
-     * Parse raw header text
-     * @param string $raw_header
-     */
-    public function parseHeader($raw_header) {
-        $headers = array();
-        foreach (explode("\r\n", trim($raw_header, "\r\n")) as $line) {
-            if (strpos($line, ':') !== false) {
-                list($key, $value) = explode(':', $line, 2);
-                $headers[trim($key)] = trim($value);
-            }
-        }
-        return $headers;
     }
     
     protected function initialize($config) {
