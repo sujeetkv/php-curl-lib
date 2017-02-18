@@ -332,12 +332,10 @@ class Curl
                 curl_close($this->request);
                 $this->clear();
                 
-                $header_size = $this->info['header_size'];
-                $http_code = $info['http_code'];
-                $headers = substr($response, 0, $header_size);
-                $body = substr($response, $header_size);
+                $headers = substr($response, 0, $this->info['header_size']);
+                $body = substr($response, $this->info['header_size']);
                 
-                return new CurlResponse($response, $headers, $body, $http_code);
+                return new CurlResponse($response, $headers, $body, $this->info['http_code']);
             }
         } else {
             $this->clear();
