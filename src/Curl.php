@@ -28,7 +28,7 @@ class Curl
     protected $strict_mode = false;
     protected $max_redirects = 10;
     
-    protected $http_version = NULL;
+    protected $http_version = CURL_HTTP_VERSION_1_1;
     protected $http_versions = array(
         '1.0' => CURL_HTTP_VERSION_1_0,
         '1.1' => CURL_HTTP_VERSION_1_1
@@ -310,7 +310,7 @@ class Curl
         }
         
         (isset($this->options[CURLOPT_HTTPHEADER]) or empty($this->headers)) or $this->options[CURLOPT_HTTPHEADER] = $this->headers;
-        (isset($this->options[CURLOPT_HTTP_VERSION]) or empty($this->http_version)) or $this->options[CURLOPT_HTTP_VERSION] = $this->http_version;
+        (isset($this->options[CURLOPT_HTTP_VERSION])) or $this->options[CURLOPT_HTTP_VERSION] = $this->http_version;
         isset($this->options[CURLOPT_USERAGENT]) or $this->options[CURLOPT_USERAGENT] = self::USER_AGENT;
         
         if ($this->request = curl_init($this->url) and is_resource($this->request)) {
@@ -335,7 +335,7 @@ class Curl
                 $headers = substr($response, 0, $this->info['header_size']);
                 $body = substr($response, $this->info['header_size']);
                 
-                return new CurlResponse($response, $headers, $body, $this->info['http_code']);
+                return new CurlResponse($response, $headers, $body, $this->info['http_code'], array_search($this->http_version, $this->http_versions));
             }
         } else {
             $this->clear();

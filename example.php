@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 require './src/Curl.php';
 require './src/CurlException.php';
 require './src/CurlResponse.php';
@@ -17,8 +20,10 @@ $curl = new Curl(array(
 $res1 = $curl->get('http://example.com');
 //echo $res1;
 echo '<pre>';
-print_r($curl->getInfo());
+echo $res1->getProtocolVersion() . PHP_EOL;
+echo $res1->getStatusCode() . ' ' . $res1->getReasonPhrase() . PHP_EOL;
 print_r($res1->getHeaders());
+print_r($curl->getInfo());
 echo '</pre>';
 
 
