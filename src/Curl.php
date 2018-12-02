@@ -1,15 +1,15 @@
 <?php
-namespace SujeetKumar\CurlLib;
+namespace SujeetKV\CurlLib;
 
 /**
  * PHP Curl Library
  * 
  * @author Sujeet <sujeetkv90@gmail.com>
- * @link https://github.com/sujeet-kumar/php-curl-lib
+ * @link https://github.com/sujeetkv/php-curl-lib
  */
 class Curl
 {
-    const USER_AGENT = 'PHP Curl Library (+https://github.com/sujeet-kumar/php-curl-lib)';
+    const USER_AGENT = 'PHP Curl Library (+https://github.com/sujeetkv/php-curl-lib)';
     
     protected $url = '';
     protected $port = 80;

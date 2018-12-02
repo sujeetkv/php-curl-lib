@@ -5,15 +5,16 @@ PHP Curl Library
 
 Install using composer:
 
-    {
-        "repositories": [
-            {
-                "type": "vcs",
-                "url": "https://github.com/sujeet-kumar/php-curl-lib"
-            }
-        ],
-        "require": {
-            "sujeet-kumar/php-curl-lib": "dev-master"
+```json
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/sujeetkv/php-curl-lib"
         }
+    ],
+    "require": {
+        "sujeetkv/php-curl-lib": "dev-master"
     }
-
+}
+```

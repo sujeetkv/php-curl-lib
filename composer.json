@@ -1,9 +1,9 @@
 {
-    "name": "sujeet-kumar/php-curl-lib",
+    "name": "sujeetkv/php-curl-lib",
     "description": "PHP Curl Library",
     "type": "library",
     "keywords": ["php", "curl", "library"],
-    "homepage": "https://github.com/sujeet-kumar/php-curl-lib/",
+    "homepage": "https://github.com/sujeetkv/php-curl-lib/",
     "license": "MIT",
     "authors": [
         {
@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "SujeetKumar\\CurlLib\\": "src/"
+            "SujeetKV\\CurlLib\\": "src/"
         }
     },
     "minimum-stability": "dev"

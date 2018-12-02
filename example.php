@@ -6,7 +6,7 @@ require './src/Curl.php';
 require './src/CurlException.php';
 require './src/CurlResponse.php';
 
-use SujeetKumar\CurlLib\Curl;
+use SujeetKV\CurlLib\Curl;
 
 $curl = new Curl(array(
     'timeout' => 30, // time limit for request

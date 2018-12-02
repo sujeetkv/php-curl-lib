@@ -1,12 +1,12 @@
 <?php
-namespace SujeetKumar\CurlLib;
+namespace SujeetKV\CurlLib;
 
 /**
  * CurlResponse class
  * - PSR 7 compliant
  * 
  * @author Sujeet <sujeetkv90@gmail.com>
- * @link https://github.com/sujeet-kumar/php-curl-lib
+ * @link https://github.com/sujeetkv/php-curl-lib
  */
 class CurlResponse
 {
